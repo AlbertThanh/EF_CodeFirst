@@ -1,0 +1,111 @@
+﻿@model EF_CodeFirst.Models.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+<form action="/products/edit/@Model.ProductID" method="post">
+    <input type="hidden" name="ProductID" value="@Model.ProductID" />
+    <div class="row">
+        <div class="col-md-6">
+            <label for="ProductName">ProductName</label>
+            <input type="text"
+                   class="form-control"
+                   id="ProductName"
+                   name="ProductName"
+                   placeholder="ProductName"
+                   value="@Model.ProductName" />
+        </div>
+        <div class="col-md-6">
+            <label for="Price">Price</label>
+            <input type="number"
+                   class="form-control"
+                   id="Price"
+                   name="Price"
+                   placeholder="Price"
+                   value="@Model.Price" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="DateOfPurchase">DateOfPurchase</label>
+            <input type="date"
+                   class="form-control"
+                   id="DateOfPurchase"
+                   name="DateOfPurchase"
+                   placeholder="DateOfPurchase"
+                   value="@Model.DateOfPurchase.Value.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col-md-6">
+            <label for="AvailabilityStatus">AvailabilityStatus</label>
+            <select class="form-control"
+                    id="AvailabilityStatus"
+                    name="AvailabilityStatus">
+                @if (@Model.AvailabilityStatus == "InStock")
+                {
+                    <option value="InStock" selected>In Stock</option>
+                    <option value="OutOfStock">Out Of Stock</option>
+                }
+                else
+                {
+                    <option value="InStock">In Stock</option>
+                    <option value="OutOfStock" selected>Out Of Stock</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="CategoryID">CategoryID</label>
+            <select class="form-control"
+                    id="CategoryID"
+                    name="CategoryID">
+                @foreach (var item in ViewBag.Categories)
+                {
+                    if (item.CategoryID == Model.CategoryID)
+                    {
+                        <option value="@item.CategoryID" selected>@item.CategoryName</option>
+                    }
+                    else
+                    {
+                        <option value="@item.CategoryID">@item.CategoryName</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="Brand">Brand</label>
+            <select class="form-control"
+                    id="Brand"
+                    name="Brand">
+                @foreach (var item in ViewBag.Brands)
+                {
+                    if (item.BrandID == Model.BrandID)
+                    {
+                        <option value="@item.BrandID" selected>@item.BrandName</option>
+                    }
+                    else
+                    {
+                        <option value="@item.BrandID">@item.BrandName</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label class="form-check-label" for="Active">Active</label>
+            <input type="checkbox"
+                   class="form-check-input"
+                   id="Active"
+                   name="Active"
+                   placeholder="Active"
+                   value="true"
+                   checked="@Model.Active" />
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="/products" class="btn btn-danger">Cancel</a>
+</form>

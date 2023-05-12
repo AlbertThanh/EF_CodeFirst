@@ -1,0 +1,31 @@
+﻿@model EF_CodeFirst.Models.Product
+
+@{
+    ViewBag.Title = "Delete Product";
+}
+
+<h2>Delete Product</h2>
+
+<form action="/products/delete/@Model.ProductID" method="post">
+    <input type="hidden" name="Product" value="@Model.ProductID" />
+
+    <table class="table">
+        <tr>
+            <th>Product ID</th>
+            <td>@Model.ProductID</td>
+        </tr>
+        <tr>
+            <th>Product Name</th>
+            <td>@Model.ProductName</td>
+        </tr>
+        <tr>
+            <th>Product Price</th>
+            <td>@Model.Price.Value.ToString()</td>
+        </tr>
+
+
+    </table>
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="/products/index" class="btn btn-dark">Cancel</a>
+</form>
