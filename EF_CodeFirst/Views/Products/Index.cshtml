@@ -62,17 +62,19 @@
     {
         <tr>
             <td>@Html.DisplayFor(row => item.ProductID)</td>
-            <td><a href="/products/detail/@item.ProductID">@item.ProductName</a></td>
-            <td>@item.Price.Value.ToString("C")</td>
-            <td>@item.DateOfPurchase.Value.ToString("dd/MM/yyyy")</td>
+            <td>@Html.ActionLink(Html.DisplayFor(row => item.ProductName).ToString(),
+               "Detail", new { id = item.ProductID, controller = "Products" })</td>
+            <td>@Html.DisplayFor(row => item.Price).ToString()</td>
+            <td>@Html.DisplayFor(row => item.DateOfPurchase)</td>
             <td>@item.AvailabilityStatus</td>
             <td>@item.Category.CategoryName</td>
             <td>@item.Brand.BrandName</td>
             <td>@item.Active</td>
 
             <td>
-                <a href="/products/edit/@item.ProductID">Edit</a>
-                <a href="/products/delete/@item.ProductID">Delete</a>
+                @Html.ActionLink("Edit", "Edit", new {id = item.ProductID, controller = "Products"})
+                @Html.ActionLink("Delete","Delete", new {id = item.ProductID, controller ="Products"})
+                
             </td>
         </tr>
     }
