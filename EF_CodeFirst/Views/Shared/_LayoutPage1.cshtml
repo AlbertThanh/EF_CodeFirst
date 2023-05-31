@@ -7,6 +7,14 @@
     <meta charset="utf-8" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-info navbar-dark">
@@ -27,6 +35,13 @@
                 </li>
             </ul>
         </div>
+
+        @if (User.Identity.IsAuthenticated)
+            {
+                <div style="color : red; font-weight: bold">
+                     Hello @User.Identity.Name
+                </div>
+            }
 
 
     </nav>

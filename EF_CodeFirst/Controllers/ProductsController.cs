@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace EF_CodeFirst.Controllers
 {
     public class ProductsController : Controller
@@ -80,9 +81,19 @@ namespace EF_CodeFirst.Controllers
         [HttpPost]
         public ActionResult Create(Product p)
         {
-            db.Products.Add(p);
-            db.SaveChanges();
-            return RedirectToAction("Index", "Products");
+            if (ModelState.IsValid)
+            {
+                db.Products.Add(p);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                //return RedirectToAction("Create");
+                ViewBag.Categories = db.Categories.ToList();
+                ViewBag.Brands = db.Brands.ToList();
+                return View();
+            }
         }
         public ActionResult Edit(int id)
         {

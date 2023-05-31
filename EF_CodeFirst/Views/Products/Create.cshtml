@@ -10,19 +10,20 @@
     {
 <div class="row">
     <div class="col-md-6">
-        @Html.LabelFor(row => row.ProductName, "Product Name")
-        @Html.TextBoxFor(row => row.ProductName, new {@class = "form-control", placeholder = "Produc tName" })
+        @Html.LabelFor(row => row.ProductName)
+        @Html.TextBoxFor(row => row.ProductName, new {@class = "form-control",
+       placeholder = "Product Name" })
        
+        @Html.ValidationMessageFor(row => row.ProductName)
     </div>
-    @Html.InputHelp("col-md-6","Price","Price")
-    @*<div class="col-md-6">
-        <label for="Price">Price</label>
-        <input type="number"
-               class="form-control"
-               id="Price"
-               name="Price"
-               placeholder="Price" />
-    </div>*@
+    @*Html.InputHelp("col-md-6","Price","Price")*@
+<div class="col-md-6">
+    <label for="Price">Price</label>
+    @Html.TextBoxFor(row => row.Price, new
+    { @class = "form-control", placeholder = "Price" })
+    @Html.ValidationMessageFor(row => row.Price)
+
+</div>
 </div>
 <div class="row">
     <div class="col-md-6">
@@ -47,13 +48,18 @@
 <div class="row">
     <div class="col-md-6">
         <label for="CategoryID">Category</label>
-        @Html.DropDownListFor(row => row.CategoryID,new SelectList(ViewBag.Categories, "CategoryID",
-       "CategoryName"), "Please Select ...", new {@class="form-control"})
+        @Html.DropDownListFor(row => row.CategoryID, new SelectList(ViewBag.Categories, "CategoryID",
+       "CategoryName"), "Please Select ...", new { @class = "form-control" })
+        @Html.ValidationMessageFor(row => row.CategoryID)
 
     </div>
     <div class="col-md-6">
         <label for="BrandID">Brand</label>
-        <select class="form-control"
+
+        @Html.DropDownListFor(row => row.BrandID, new SelectList(ViewBag.Brands, "BrandID", "BrandID"),
+        "Please Select ...",new {@class = "form-control" })
+        @Html.ValidationMessageFor(row => row.BrandID)
+        @*<select class="form-control"
                 id="BrandID"
                 name="BrandID">
             <option value="">Please select ...</option>
@@ -61,7 +67,7 @@
             {
                 <option value="@item.BrandID">@item.BrandName</option>
             }
-        </select>
+        </select>*@
     </div>
 </div>
 <div class="row">
@@ -76,6 +82,7 @@
     </div>
 
 </div>
+@Html.ValidationSummary()
 <button type="submit" class="btn btn-success">Create</button>
 <a href="/products" class="btn btn-danger">Cancel</a>
 }
